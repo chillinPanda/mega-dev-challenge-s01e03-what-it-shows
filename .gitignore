@@ -2,3 +2,4 @@ node_modules/
 .svelte-kit/
 support-kb/build/
 .lavish/
+.course-log/
