@@ -1,0 +1,74 @@
+---
+layout: runbook
+title: '#4471 reassessed · two causes hidden by one subject'
+owner: 'Codex with Dinh Bao Dang'
+status: investigated
+reviewed: '2026-10-28'
+signature: 'Codex for Dinh Bao Dang · S01E03 · 2026-10-28'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import Reassessment from '#lib/kb/Reassessment.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+The desk's “one issue, one fix” summary is contradicted by its own data and classification logic.
+The parser and booking-v3 hint need separate tickets. “Known” does not mean fixed.
+This review covers the export through 4 October 2026. It does not claim to be today's live queue.
+
+## Two problems, two tickets
+
+<CauseTable ticket={4471} />
+
+The table classifies each report using its tenant's locale and booking form, plus its channel.
+It does not classify from the subject, browser locale, or intake tag.
+
+- **Parser:** the shared parser reads month first for day-first tenants. For example, a booking for 7 April becomes 4 July. App and email reports belong here, as do form reports without the booking-v3 hint mismatch. Fix parsing according to the explicit input contract; test ambiguous and unambiguous dates.
+- **Hint:** booking-v3 prints `MM/DD/YYYY`, but reads input in the tenant's day-first order. People follow the hint and the form reverses their intended month and day. Align the hint and input interpretation. A parser-only fix does not correct this prompt. This group covers forms at Alder Physio, Copper Studio, and Pale Harbour.
+
+Filed separately in this repository: [parser issue #1](https://github.com/chillinPanda/mega-dev-challenge-s01e03-what-it-shows/issues/1) and [hint issue #2](https://github.com/chillinPanda/mega-dev-challenge-s01e03-what-it-shows/issues/2). The table describes the original support export, where the hint had no ticket of its own. The GitHub issues use the same counts and source IDs; their drafts and the complete machine-readable partition are stored in this repository.
+
+## Count reports, not export rows
+
+<Reassessment />
+
+The grouping is the supplied KB model, not proof that every report body has a diagnosed cause.
+The unresolved reports above need reproduction and original timestamps, timezone settings, intended date, and observed date before reassignment.
+
+## The queue kept arriving
+
+<QueueTimeline ticket={4471} />
+
+Reports arrived from April through October. The large July merge column records desk activity.
+The received columns continue afterwards; the “known” label does not demonstrate recovery.
+Monthly totals include a partial October, so they cannot establish an October decline.
+Keep received time separate from merged time when judging incident onset and ongoing impact.
+
+## Replace the subject-only rule
+
+[Decision 0001](/kb/decisions/0001-dedupe-by-subject) is accepted but was last reviewed in June 2024.
+Its subject-only rule is stale and conflicts with the cause-based explorer below. The original accepted decision remains unchanged.
+
+<DedupeExplorer />
+
+For example, Alder Physio's form and app reports have the same subject but different causes.
+Kettle Books' app and email reports have different subjects but the same cause.
+A missing tenant is insufficient evidence to merge, even if the subjects match.
+
+<Callout>
+Proposed replacement: merge only when the affected path, tenant configuration, reproduction, and cause agree. Use subjects to find candidates. Read the bodies and verify the configuration before merging. Hold uncertain reports for investigation. Product or support owners must accept this replacement; this review does not grant their approval.
+</Callout>
+
+## What the desk does next
+
+1. Track the parser and form hint separately. Preserve report IDs and original received times when moving reports.
+2. Investigate the anomalous reports without silently removing them from the existing counts.
+3. Reconcile the incident summary with the rendered table and chart; do not copy old prose as evidence.
+4. Request owner acceptance of a new decision replacing 0001. Update the triage guidance when accepted.
+5. Refresh the export and rerender this page before using its counts for a later queue. The desk continues working.
+
+<RenderStamp {signature} />
