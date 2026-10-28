@@ -9,6 +9,8 @@ Reassessment of the course support desk's #4471. The original KB export is prese
 - [Parser issue draft](drafts/parser-issue.md)
 - [Hint issue draft](drafts/hint-issue.md)
 
+Engineering update: #4471 closed on 5 October. Parser fixed (issue #1 completed); booking-v3 retired with no hint fix (issue #2 not planned). These outcomes are reported by the course, not independently verified product changes.
+
 Published issues: [parser #1](https://github.com/chillinPanda/mega-dev-challenge-s01e03-what-it-shows/issues/1), [hint #2](https://github.com/chillinPanda/mega-dev-challenge-s01e03-what-it-shows/issues/2).
 
 ## Reproduce

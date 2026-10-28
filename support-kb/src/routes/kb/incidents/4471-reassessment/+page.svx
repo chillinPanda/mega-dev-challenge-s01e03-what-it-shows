@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 reassessed · two causes hidden by one subject'
 owner: 'Codex with Dinh Bao Dang'
-status: investigated
+status: closed
 reviewed: '2026-10-28'
 signature: 'Codex for Dinh Bao Dang · S01E03 · 2026-10-28'
 ---
@@ -18,7 +18,16 @@ signature: 'Codex for Dinh Bao Dang · S01E03 · 2026-10-28'
 
 The desk's “one issue, one fix” summary is contradicted by its own data and classification logic.
 The parser and booking-v3 hint need separate tickets. “Known” does not mean fixed.
-This review covers the export through 4 October 2026. It does not claim to be today's live queue.
+The counts cover the export through 4 October 2026. A later engineering update supplies the closure outcomes below.
+
+## Engineering update · 5 October
+
+The [course challenge page](https://hq.mega.dev/challenges/what-it-shows) now reports #4471 closed on 5 October:
+
+- **Parser — FIXED:** `fix(dates): parse dd/mm for eu locales`. GitHub issue #1 is closed as completed.
+- **Hint — WON'T FIX:** booking-v3 form retired. GitHub issue #2 is closed as not planned. Retirement is not a hint fix.
+
+These outcomes come from the desk's engineering update. This repository does not contain the product patch, and we have not independently verified it. Historical report counts remain unchanged. The original export predates this update; its live components describe that export.
 
 ## Two problems, two tickets
 
@@ -65,7 +74,7 @@ Proposed replacement: merge only when the affected path, tenant configuration, r
 
 ## What the desk does next
 
-1. Track the parser and form hint separately. Preserve report IDs and original received times when moving reports.
+1. Keep the parser fix and form retirement recorded as different closure outcomes. Preserve report IDs and original received times.
 2. Investigate the anomalous reports without silently removing them from the existing counts.
 3. Reconcile the incident summary with the rendered table and chart; do not copy old prose as evidence.
 4. Request owner acceptance of a new decision replacing 0001. Update the triage guidance when accepted.
